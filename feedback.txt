@@ -1,0 +1,13 @@
+AI Challanges
+	-> Deze vond ik wel leuk om op te zoeken
+		Die van de neuronen was moeilijk
+
+Crack
+	-> Conceiled image was was plezant.
+		Moeilijk om het antwoord te vindne maar eenmaal ik met de kleuren speelde ging het wel vlot.
+	-> Hash
+		Heb ik opgelost via https://sha1.gromweb.com/?hash=10ceee87f8b145ab495c3bca73b94455970159c6 op de website dus reverse SHA-1
+	-> Pass 1
+		Via Intelij opengedaan en swordfish is het antwoord
+	-> Pass 2
+		minstens 50 char moet beginnen met @ en moet password hebben en 123454321 en de rest dan opgevuld met _ tot 50 chars
