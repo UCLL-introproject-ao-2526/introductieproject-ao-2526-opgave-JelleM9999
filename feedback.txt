@@ -11,3 +11,13 @@ Crack
 		Via Intelij opengedaan en swordfish is het antwoord
 	-> Pass 2
 		minstens 50 char moet beginnen met @ en moet password hebben en 123454321 en de rest dan opgevuld met _ tot 50 chars
+		
+04-Multimedia
+	-> Color
+		Via de Color Analyser was dit heel makkelijk te achterhalen
+	-> Image
+		Ging makkelijk gewoon kijken in file explorer
+		
+05-Data-formats
+	-> 06-qr 
+		goeie meme van vroeger :D 
