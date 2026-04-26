@@ -31,6 +31,9 @@ outcome = 0
 add_score = False
 results = ['', 'PLAYER BUSTED o_O', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GAME...']
 
+# kleur variabelen voor achtergrond
+BG_COLOR = (53, 101, 77)    # casino groen
+BORDER_COLOR = (30, 60, 45) # iets donkerder groen voor de rand
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
 def deal_cards(current_hand, current_deck):
@@ -156,7 +159,17 @@ run = True
 while run:
     # run game at our framerate and fill screen with bg color
     timer.tick(fps)
-    screen.fill('black')
+
+    # Casino groene achtergrond toevoegen
+    screen.fill(BG_COLOR)
+
+    # Decoratieve rand toevoegen rond het scherm
+    pygame.draw.rect(screen, BORDER_COLOR, [10, 10, WIDTH - 20, HEIGHT - 20], 8, 10)
+
+    # Mooie gouden titel als het spel nog nit gestart is tonen
+    if not active:
+        screen.blit(font.render('BLACKJACK', True, 'gold'), (165, 430))
+        
     # initial deal to player and dealer
     if initial_deal:
         for i in range(2):
