@@ -24,6 +24,7 @@ fps = 60
 timer = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 44)
 smaller_font = pygame.font.Font('freesansbold.ttf', 36)
+suit_font = pygame.font.SysFont('segoeuisymbol', 36)
 active = False
 # win, loss, draw/push
 records = [0, 0, 0]
@@ -74,11 +75,11 @@ def draw_cards(player, dealer, reveal):
 
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
         
-        # de kaartwaarde en het symbool op de kaart tekenen, met de juiste kleur dus linksboven en rechtsonder
+        # de kaartwaarde en het symbool op de kaart tekenen, met de juiste kleur en symbool dus linksboven en rechtsonder
         screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 465 + 5 * i))
-        screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 465 + 5 * i))
-        screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 635 + 5 * i))
-        screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 635 + 5 * i))
+        screen.blit(suit_font.render(card_suit, True, text_color), (75 + 70 * i, 509 + 5 * i))
+        screen.blit(suit_font.render(card_suit, True, text_color), (148 + 70 * i, 595 + 5 * i))
+        screen.blit(font.render(card_value, True, text_color), (148 + 70 * i, 631 + 5 * i))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
 
     for i in range(len(dealer)):
@@ -93,9 +94,9 @@ def draw_cards(player, dealer, reveal):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i), 120, 220], 0, 5)
         if i != 0 or reveal:
             screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 335 + 5 * i))
-            screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 335 + 5 * i))
+            screen.blit(suit_font.render(card_suit, True, text_color), (75 + 70 * i, 209 + 5 * i))
+            screen.blit(suit_font.render(card_suit, True, text_color), (148 + 70 * i, 295 + 5 * i))
+            screen.blit(font.render(card_value, True, text_color), (148 + 70 * i, 331 + 5 * i))
         else:
             # verborgen kaart van de dealer dieie nog niet zichtbaar is, dus gewoon vraagtekens weergeven
             screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))

@@ -35,9 +35,21 @@ Mijn vorige commit was niet echt gelukt maar bon.
 Dit is tot nu toe mijn moeilijkste stap, omwille van het vele refractoren van de code voor dit te laten slagen.
 Ik wilde de kaartkleuren toevoegen maar wist eerst niet goed hoe ik dit moest aan pakken. 
 Vervolgens besloot ik het als een tuple op te slaan maar dan was de calculate_score functie weer kapot omdat die de kaarten met strings vergelijkt.
-De hand[i] moest ik dan vervangen met hand [i][0] op verschillende plaatsen dus heb ik uiteindelijk op veel gewoon opnieuw beginnen typen.
+De hand[i] moest ik dan vervangen met hand[i][0] op verschillende plaatsen dus heb ik uiteindelijk op veel gewoon opnieuw beginnen typen.
 Na veel bloed zweet,tranen en een uur of 3 later zijn de kleuren correct en werkt het spel effectief terug wat een geluk...
 
 Maar nu zit ik met het probleem dat de symbolen niet correct geladen worden alsook dat het niet zo staat zoals ik het zelf wil.
 Dus dit voelt aan als ene stap achteruit jammer genoeg, maar met nog wat tijd en energie denk ik het wel te kunnen oplossen. 
 De tuples die ik gemaakt heb werken goed maar ik moet echt uitzoeken waar het probleem nu zit in verband met de symbolen en de locaties.
+
+## 27 April 22:51
+Ik heb gevonden waarom mijn symbolen niet wilde laden en het font was uiteraard de oorzaak.
+Gelukkig met een ander font te maken voor mijn symbolen en deze toe te passen op de kaarten zorgen er voor dat de symbolen nu correct zijn.
+
+Ik had blijkbaar ook de positionering niet goed gedaan vorige keer van waar de kaart value & kaart suits terechtkomen.
+Dus deze heb ik nu wel goed gezet zodanig dat het linksboven en rechtonder is.
+Toch wel wat frustrened allemaal als je al wat moe bent :) 
+
+Morgen moet ik er weer om 0500 opstaan dus ik denk dat ik het voor vandaag voor bekeken houdt.
+Tijdens de dag als de kinderen op school zijn ga ik proberen om misschien het toch nog iets mooier te laten uitkomen of wel te beginnen aan het welkomscherm.
+ik moet mijzelf altijd zeggen dat ik het niet te perfectionistisch om de mm moet maken.
