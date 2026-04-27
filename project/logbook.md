@@ -29,3 +29,5 @@ Alsook heb ik een titel BLACKJACK bovenaan geplaats met een gouden kleur als het
 Ik had wel gedacht dat het makkelijk zou zijn deze aanpassingen en dat klopt ook maar omwille van de kleurwaarde en het opzoekwerk heb ik er toch wel wat tijd ingestoken.
 
 Volgende stap ga ik proberen de kaarten te kleuren en de symbolen toe te voegen.
+
+## 27 April 18:30

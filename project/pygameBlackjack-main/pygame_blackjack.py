@@ -5,8 +5,16 @@ import pygame
 
 pygame.init()
 # game variables
-cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-one_deck = 4 * cards
+
+# Kaarten moeten nu als tuples worden opgeslagen voor zowel de waarde and het symbool
+card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+card_suits = ['♠', '♥', '♦', '♣']
+
+one_deck = []
+for suit in card_suits:
+    for value in card_values:
+        one_deck.append((value, suit))
+
 decks = 4
 WIDTH = 600
 HEIGHT = 900
