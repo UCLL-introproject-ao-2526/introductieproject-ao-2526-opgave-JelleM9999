@@ -30,4 +30,14 @@ Ik had wel gedacht dat het makkelijk zou zijn deze aanpassingen en dat klopt ook
 
 Volgende stap ga ik proberen de kaarten te kleuren en de symbolen toe te voegen.
 
-## 27 April 18:30
+## 27 April 22:31
+Mijn vorige commit was niet echt gelukt maar bon.
+Dit is tot nu toe mijn moeilijkste stap, omwille van het vele refractoren van de code voor dit te laten slagen.
+Ik wilde de kaartkleuren toevoegen maar wist eerst niet goed hoe ik dit moest aan pakken. 
+Vervolgens besloot ik het als een tuple op te slaan maar dan was de calculate_score functie weer kapot omdat die de kaarten met strings vergelijkt.
+De hand[i] moest ik dan vervangen met hand [i][0] op verschillende plaatsen dus heb ik uiteindelijk op veel gewoon opnieuw beginnen typen.
+Na veel bloed zweet,tranen en een uur of 3 later zijn de kleuren correct en werkt het spel effectief terug wat een geluk...
+
+Maar nu zit ik met het probleem dat de symbolen niet correct geladen worden alsook dat het niet zo staat zoals ik het zelf wil.
+Dus dit voelt aan als ene stap achteruit jammer genoeg, maar met nog wat tijd en energie denk ik het wel te kunnen oplossen. 
+De tuples die ik gemaakt heb werken goed maar ik moet echt uitzoeken waar het probleem nu zit in verband met de symbolen en de locaties.

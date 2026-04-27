@@ -61,44 +61,78 @@ def draw_scores(player, dealer):
 # draw cards visually onto screen
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
+
+        # de kaartnaam en suit uit de tuple halen voor de juiste kleur en weergave
+        card_value = player[i][0]
+        card_suit = player[i][1]
+
+        # harten en ruiten zijn rood,schoppen en klaveren zijn zwart
+        if card_suit in ['♥', '♦']:
+            text_color = 'red'
+        else:
+            text_color = 'black'
+
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i))
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i))
+        
+        # de kaartwaarde en het symbool op de kaart tekenen, met de juiste kleur dus linksboven en rechtsonder
+        screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 465 + 5 * i))
+        screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 465 + 5 * i))
+        screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 635 + 5 * i))
+        screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 635 + 5 * i))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
 
-    # if player hasn't finished turn, dealer will hide one card
     for i in range(len(dealer)):
+        card_value = dealer[i][0]
+        card_suit = dealer[i][1]
+
+        if card_suit in ['♥', '♦']:
+            text_color = 'red'
+        else:
+            text_color = 'black'
+
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i), 120, 220], 0, 5)
         if i != 0 or reveal:
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 335 + 5 * i))
+            screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 165 + 5 * i))
+            screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 165 + 5 * i))
+            screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 335 + 5 * i))
+            screen.blit(smaller_font.render(card_suit, True, text_color), (130 + 70 * i, 335 + 5 * i))
         else:
+            # verborgen kaart van de dealer dieie nog niet zichtbaar is, dus gewoon vraagtekens weergeven
             screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))
             screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i))
         pygame.draw.rect(screen, 'blue', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
 
 
-# pass in player or dealer hand and get best score possible
+
+# de calculate_score functie leest nu de kaartnaam uit de tuple via hand[i][0]
 def calculate_score(hand):
-    # calculate hand score fresh every time, check how many aces we have
     hand_score = 0
-    aces_count = hand.count('A')
+    aces_count = 0
+
+    # eerst moeten het aantal azen geteld wordenn
     for i in range(len(hand)):
-        # for 2,3,4,5,6,7,8,9 - just add the number to total
-        for j in range(8):
-            if hand[i] == cards[j]:
-                hand_score += int(hand[i])
-        # for 10 and face cards, add 10
-        if hand[i] in ['10', 'J', 'Q', 'K']:
+        if hand[i][0] == 'A':
+            aces_count += 1
+
+    for i in range(len(hand)):
+        value = hand[i][0]  # de kaartnaam uit de tuple halen
+
+        # voor 2 t/m 9: gewoon het getal optellen
+        if value in ['2', '3', '4', '5', '6', '7', '8', '9']:
+            hand_score += int(value)
+        # voor 10 en figuurkaarten: 10 punten
+        elif value in ['10', 'J', 'Q', 'K']:
             hand_score += 10
-        # for aces start by adding 11, we'll check if we need to reduce afterwards
-        elif hand[i] == 'A':
+        # voor aas: begin met 11
+        elif value == 'A':
             hand_score += 11
-    # determine how many aces need to be 1 instead of 11 to get under 21 if possible
+
+    # als het te hoog is : dan moet elke aas teruggezet worden van 11 naar 1
     if hand_score > 21 and aces_count > 0:
         for i in range(aces_count):
             if hand_score > 21:
                 hand_score -= 10
+
     return hand_score
 
 
