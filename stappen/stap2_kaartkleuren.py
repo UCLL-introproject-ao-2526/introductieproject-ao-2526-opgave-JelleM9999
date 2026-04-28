@@ -70,14 +70,15 @@ def draw_cards(player, dealer, reveal):
         # Harten en ruiten rood, schoppen en klaveren zwart
         color = 'red' if suit in ['♥', '♦'] else 'black'
         pygame.draw.rect(screen, 'white', [x, y, 120, 220], 0, 5)
-        # getal linksboven
-        screen.blit(card_font.render(value, True, color), (x + 5, y + 5))
-        # suit rechtsboven
-        suit_surf = card_font.render(suit, True, color)
-        screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 5))
-        # getal rechtsonder
         val_surf = card_font.render(value, True, color)
-        screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - val_surf.get_height() - 5))
+        suit_surf = card_font.render(suit, True, color)
+        line_h = val_surf.get_height()
+        # getal + suit gestapeld linksboven
+        screen.blit(val_surf, (x + 5, y + 5))
+        screen.blit(suit_surf, (x + 5, y + 5 + line_h))
+        # suit + getal gestapeld rechtsonder (gespiegeld)
+        screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+        screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - 5 - line_h))
         pygame.draw.rect(screen, 'red', [x, y, 120, 220], 5, 5)
 
     for i in range(len(dealer)):
@@ -88,14 +89,20 @@ def draw_cards(player, dealer, reveal):
             value = dealer[i][0]
             suit = dealer[i][1]
             color = 'red' if suit in ['♥', '♦'] else 'black'
-            screen.blit(card_font.render(value, True, color), (x + 5, y + 5))
-            suit_surf = card_font.render(suit, True, color)
-            screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 5))
             val_surf = card_font.render(value, True, color)
-            screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - val_surf.get_height() - 5))
+            suit_surf = card_font.render(suit, True, color)
+            line_h = val_surf.get_height()
+            screen.blit(val_surf, (x + 5, y + 5))
+            screen.blit(suit_surf, (x + 5, y + 5 + line_h))
+            screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+            screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - 5 - line_h))
         else:
-            screen.blit(card_font.render('???', True, 'black'), (x + 5, y + 5))
-            screen.blit(card_font.render('???', True, 'black'), (x + 5, y + 220 - card_font.size('???')[1] - 5))
+            q_surf = card_font.render('?', True, 'black')
+            line_h = q_surf.get_height()
+            screen.blit(q_surf, (x + 5, y + 5))
+            screen.blit(q_surf, (x + 5, y + 5 + line_h))
+            screen.blit(q_surf, (x + 120 - q_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+            screen.blit(q_surf, (x + 120 - q_surf.get_width() - 5, y + 220 - 5 - line_h))
         pygame.draw.rect(screen, 'blue', [x, y, 120, 220], 5, 5)
 
 

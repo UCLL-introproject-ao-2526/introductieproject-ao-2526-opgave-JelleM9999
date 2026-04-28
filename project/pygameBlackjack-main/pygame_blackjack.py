@@ -68,14 +68,15 @@ def draw_cards(player, dealer, reveal):
         suit = player[i][1]
         color = 'red' if suit in ['♥', '♦'] else 'black'
         pygame.draw.rect(screen, 'white', [x, y, 120, 220], 0, 5)
-        # value top-left
-        screen.blit(card_font.render(value, True, color), (x + 5, y + 5))
-        # suit top-right
-        suit_surf = card_font.render(suit, True, color)
-        screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 5))
-        # value bottom-right
         val_surf = card_font.render(value, True, color)
-        screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - val_surf.get_height() - 5))
+        suit_surf = card_font.render(suit, True, color)
+        line_h = val_surf.get_height()
+        # top-left: value then suit stacked vertically
+        screen.blit(val_surf, (x + 5, y + 5))
+        screen.blit(suit_surf, (x + 5, y + 5 + line_h))
+        # bottom-right: suit then value stacked vertically (mirrored)
+        screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+        screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - 5 - line_h))
         pygame.draw.rect(screen, 'red', [x, y, 120, 220], 5, 5)
 
     # if player hasn't finished turn, dealer will hide one card
@@ -87,17 +88,22 @@ def draw_cards(player, dealer, reveal):
             value = dealer[i][0]
             suit = dealer[i][1]
             color = 'red' if suit in ['♥', '♦'] else 'black'
-            # value top-left
-            screen.blit(card_font.render(value, True, color), (x + 5, y + 5))
-            # suit top-right
-            suit_surf = card_font.render(suit, True, color)
-            screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 5))
-            # value bottom-right
             val_surf = card_font.render(value, True, color)
-            screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - val_surf.get_height() - 5))
+            suit_surf = card_font.render(suit, True, color)
+            line_h = val_surf.get_height()
+            # top-left: value then suit stacked vertically
+            screen.blit(val_surf, (x + 5, y + 5))
+            screen.blit(suit_surf, (x + 5, y + 5 + line_h))
+            # bottom-right: suit then value stacked vertically (mirrored)
+            screen.blit(suit_surf, (x + 120 - suit_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+            screen.blit(val_surf, (x + 120 - val_surf.get_width() - 5, y + 220 - 5 - line_h))
         else:
-            screen.blit(card_font.render('???', True, 'black'), (x + 5, y + 5))
-            screen.blit(card_font.render('???', True, 'black'), (x + 5, y + 220 - card_font.size('???')[1] - 5))
+            q_surf = card_font.render('?', True, 'black')
+            line_h = q_surf.get_height()
+            screen.blit(q_surf, (x + 5, y + 5))
+            screen.blit(q_surf, (x + 5, y + 5 + line_h))
+            screen.blit(q_surf, (x + 120 - q_surf.get_width() - 5, y + 220 - 5 - 2 * line_h))
+            screen.blit(q_surf, (x + 120 - q_surf.get_width() - 5, y + 220 - 5 - line_h))
         pygame.draw.rect(screen, 'blue', [x, y, 120, 220], 5, 5)
 
 
