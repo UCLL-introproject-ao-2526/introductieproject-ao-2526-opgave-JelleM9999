@@ -25,6 +25,9 @@ timer = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 44)
 smaller_font = pygame.font.Font('freesansbold.ttf', 36)
 suit_font = pygame.font.SysFont('segoeuisymbol', 36)
+value_font = pygame.font.SysFont('freesansbold.ttf', 46)
+title_font = pygame.font.Font('freesansbold.ttf', 72)
+tiny_font = pygame.font.Font('freesansbold.ttf', 15)
 active = False
 # win, loss, draw/push
 records = [0, 0, 0]
@@ -43,6 +46,28 @@ results = ['', 'PLAYER BUSTED o_O', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GA
 # kleur variabelen voor achtergrond
 BG_COLOR = (53, 101, 77)    # casino groen
 BORDER_COLOR = (30, 60, 45) # iets donkerder groen voor de rand
+
+# bijhouden of het welkomscherm al gedaan is of neit
+game_started = False
+
+
+# functie om het welkomstscherm te tekenen
+def draw_welcome():
+    screen.fill(BG_COLOR)
+    pygame.draw.rect(screen, BORDER_COLOR, [10, 10, WIDTH - 20, HEIGHT - 20], 8, 10)
+
+    # grote titel vooraan
+    screen.blit(title_font.render('BLACKJACK', True, 'gold'), (60, 280))
+
+    # kaart-symbolen als decoratie op het scherm
+    screen.blit(suit_font.render('♠  ♥  ♦  ♣', True, 'white'), (200, 380))
+
+    # instructie onderaan wat je moet doen 
+    screen.blit(smaller_font.render('Druk SPATIE om te starten', True, 'white'), (60, 480))
+    screen.blit(smaller_font.render('of klik ergens', True, (180, 220, 180)), (175, 530))
+    screen.blit(tiny_font.render('Made by Jelle for OPO "Introduction Project', True, (180, 220, 180)), (25, 25))
+
+
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
 def deal_cards(current_hand, current_deck):
@@ -76,10 +101,10 @@ def draw_cards(player, dealer, reveal):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
         
         # de kaartwaarde en het symbool op de kaart tekenen, met de juiste kleur en symbool dus linksboven en rechtsonder
-        screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 465 + 5 * i))
-        screen.blit(suit_font.render(card_suit, True, text_color), (75 + 70 * i, 509 + 5 * i))
-        screen.blit(suit_font.render(card_suit, True, text_color), (148 + 70 * i, 595 + 5 * i))
-        screen.blit(font.render(card_value, True, text_color), (148 + 70 * i, 631 + 5 * i))
+        screen.blit(value_font.render(card_value, True, text_color), (80 + 70 * i, 470+ 5 * i))
+        screen.blit(suit_font.render(card_suit, True, text_color), (80 + 70 * i, 490 + 5 * i))
+        screen.blit(suit_font.render(card_suit, True, text_color), (150 + 70 * i, 600 + 5 * i))
+        screen.blit(value_font.render(card_value, True, text_color), (150 + 70 * i, 645 + 5 * i))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
 
     for i in range(len(dealer)):
@@ -93,14 +118,14 @@ def draw_cards(player, dealer, reveal):
 
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i), 120, 220], 0, 5)
         if i != 0 or reveal:
-            screen.blit(font.render(card_value, True, text_color), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(suit_font.render(card_suit, True, text_color), (75 + 70 * i, 209 + 5 * i))
-            screen.blit(suit_font.render(card_suit, True, text_color), (148 + 70 * i, 295 + 5 * i))
-            screen.blit(font.render(card_value, True, text_color), (148 + 70 * i, 331 + 5 * i))
+            screen.blit(value_font.render(card_value, True, text_color), (80 + 70 * i, 165 + 5 * i))
+            screen.blit(suit_font.render(card_suit, True, text_color), (80 + 70 * i, 185 + 5 * i))
+            screen.blit(suit_font.render(card_suit, True, text_color), (150 + 70 * i, 300 + 5 * i))
+            screen.blit(value_font.render(card_value, True, text_color), (150 + 70 * i, 325 + 5 * i))
         else:
             # verborgen kaart van de dealer dieie nog niet zichtbaar is, dus gewoon vraagtekens weergeven
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i))
+            screen.blit(value_font.render('???', True, 'black'), (80 + 70 * i, 165 + 5 * i))
+            screen.blit(value_font.render('???', True, 'black'), (80 + 70 * i, 335 + 5 * i))
         pygame.draw.rect(screen, 'blue', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
 
 
@@ -149,13 +174,13 @@ def draw_game(act, record, result):
         button_list.append(deal)
     # once game started, shot hit and stand buttons and win/loss records
     else:
-        hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [0, 700, 300, 100], 3, 5)
+        hit = pygame.draw.rect(screen, 'white', [30, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [30, 700, 300, 100], 3, 5)
         hit_text = font.render('HIT ME', True, 'black')
         screen.blit(hit_text, (55, 735))
         button_list.append(hit)
-        stand = pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [300, 700, 300, 100], 3, 5)
+        stand = pygame.draw.rect(screen, 'white', [270, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [270, 700, 300, 100], 3, 5)
         stand_text = font.render('STAND', True, 'black')
         screen.blit(stand_text, (355, 735))
         button_list.append(stand)
@@ -202,6 +227,21 @@ run = True
 while run:
     # run game at our framerate and fill screen with bg color
     timer.tick(fps)
+
+    # welkomstscherm afhandelen
+    if not game_started:
+        draw_welcome()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            # spatie of muisklik om te starten
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    game_started = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                game_started = True
+        pygame.display.flip()
+        continue  # sla de rest van de loop over totdat het spel gestart is
 
     # Casino groene achtergrond toevoegen
     screen.fill(BG_COLOR)

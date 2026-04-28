@@ -53,3 +53,18 @@ Toch wel wat frustrened allemaal als je al wat moe bent :)
 Morgen moet ik er weer om 0500 opstaan dus ik denk dat ik het voor vandaag voor bekeken houdt.
 Tijdens de dag als de kinderen op school zijn ga ik proberen om misschien het toch nog iets mooier te laten uitkomen of wel te beginnen aan het welkomscherm.
 ik moet mijzelf altijd zeggen dat ik het niet te perfectionistisch om de mm moet maken.
+
+
+# 28 April 09:00
+Sinds deze morgen toch nog wat zitten aanpassen voor de symbolen en values beter te laten uitkomen.
+Uiteindelijk heeft deze loophole mij toch ook weer wat tijd gekost om op te lossen zodanig dat ze goed uitkomen.
+Alsook de knoppen zelf aanpassen is was toch even zoeken :D 
+Maar voor mij is dit momenteel goed zo.
+Nu kan ik beginnen met het welkomscherm aan te passen 
+
+# 28 April 11:00
+Ik heb zojuist het welkomstscherm gemaakt. Ik heb een variabele game_started aangemaakt die False is bij het starten. Zolang False toont het scherm een welkomstpagina met de naam van het spel. Ik liep even vast omdat ik de event-afhandeling voor het welkomstscherm apart moest doen van de rest van het spel, anders kon ik niet meer afsluiten. Uiteindelijk opgelost door een if/else structuur.
+Het was ook wel zoeken naar de pygame syntax voor dit te verwezelijken
+Nu kan er ook met een spatiebalk verder gegaan worden
+Was even zoeken weer. MAar voorlopig vind ik het zo ok.
+Nu ga ik proberen het new hand knop te fixen
