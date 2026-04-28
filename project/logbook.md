@@ -68,3 +68,17 @@ Het was ook wel zoeken naar de pygame syntax voor dit te verwezelijken
 Nu kan er ook met een spatiebalk verder gegaan worden
 Was even zoeken weer. MAar voorlopig vind ik het zo ok.
 Nu ga ik proberen het new hand knop te fixen
+
+# 28 April 22:30
+Ik heb de "New Hand" knop nu gefixed zodat die bovenaan verschijnt als het spel gedaan is, en de "Hit Me" en "Stand" knoppen dan verdwijnen.
+Hierdoor krijgt de speler na een gewonnen of verloren hand enkel de optie om opnieuw te spelen en maakt het duidelijk zichtbaar dat het spel voorbij is.
+
+Het aanpassen van de draw_game functie was even puzzelen. Ik moest de logica opsplitsen in drie gevallen: spel niet actief, spel gedaan (resultaat), en spel actief. Maar daarna merkte ik dat de win/verlies tekst plots niet meer zichtbaar was. Het bleek dat ik die tekst gewoon niet meer tekende in het nieuwe geval, dus die was gewoon verdwenen.
+
+Na even zoeken heb ik de results lijst terug opgeroepen in het juiste blok en de tekst op de correcte positie gezet. Achteraf simpel maar het heeft mij toch even gekost om te vinden waar het probleem zat.
+
+Soms denk ik dat iets niet lang gaat duren maar dan zit ge er toch weer een paar uur mee te "kloten" om het mooi te verwoorden :D
+
+Morgen na mijn werk ga ik proberen geluiden toe te voegen maar ik ben nog niet zeker wat ik exact wil doen.
+Ik denk misschien dat ik het scherm iets groter ga maken en dan rechts een paar knoppen bij zet met specifieke muziek ofzo.
+Moet er nog een nachtje over slapen :)

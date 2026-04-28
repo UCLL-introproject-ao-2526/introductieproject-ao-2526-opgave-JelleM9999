@@ -41,7 +41,7 @@ reveal_dealer = False
 hand_active = False
 outcome = 0
 add_score = False
-results = ['', 'PLAYER BUSTED o_O', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GAME...']
+results = ['', 'PLAYER BUSTED *-*', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GAME...']
 
 # kleur variabelen voor achtergrond
 BG_COLOR = (53, 101, 77)    # casino groen
@@ -65,7 +65,7 @@ def draw_welcome():
     # instructie onderaan wat je moet doen 
     screen.blit(smaller_font.render('Druk SPATIE om te starten', True, 'white'), (60, 480))
     screen.blit(smaller_font.render('of klik ergens', True, (180, 220, 180)), (175, 530))
-    screen.blit(tiny_font.render('Made by Jelle for OPO "Introduction Project', True, (180, 220, 180)), (25, 25))
+    screen.blit(tiny_font.render('Made by Jelle for OPO "Introduction Project"', True, (180, 220, 180)), (25, 25))
 
 
 
@@ -121,7 +121,7 @@ def draw_cards(player, dealer, reveal):
             screen.blit(value_font.render(card_value, True, text_color), (80 + 70 * i, 165 + 5 * i))
             screen.blit(suit_font.render(card_suit, True, text_color), (80 + 70 * i, 185 + 5 * i))
             screen.blit(suit_font.render(card_suit, True, text_color), (150 + 70 * i, 300 + 5 * i))
-            screen.blit(value_font.render(card_value, True, text_color), (150 + 70 * i, 325 + 5 * i))
+            screen.blit(value_font.render(card_value, True, text_color), (150 + 70 * i, 345 + 5 * i))
         else:
             # verborgen kaart van de dealer dieie nog niet zichtbaar is, dus gewoon vraagtekens weergeven
             screen.blit(value_font.render('???', True, 'black'), (80 + 70 * i, 165 + 5 * i))
@@ -165,38 +165,46 @@ def calculate_score(hand):
 # draw game conditions and buttons
 def draw_game(act, record, result):
     button_list = []
+    
     # initially on startup (not active) only option is to deal new hand
+
+    # Geval 1: Spel is nog niet gestart en toon DEAL HAND knop
     if not act:
         deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5)
         pygame.draw.rect(screen, 'green', [150, 20, 300, 100], 3, 5)
-        deal_text = font.render('DEAL HAND', True, 'black')
-        screen.blit(deal_text, (165, 50))
+        screen.blit(font.render('DEAL HAND', True, 'black'), (165, 50))
         button_list.append(deal)
-    # once game started, shot hit and stand buttons and win/loss records
+    
+     # Geval 2: Hand is gedaan en toon resultaat met NEW HAND knop onderaan 
+    elif result != 0:
+
+        # de score teller altijd tonen
+        score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
+        screen.blit(score_text, (15, 840))
+        # resultaat tekst (win/verlies/gelijk) tonen op dezelfde positie als de DEAL HAND knop
+        screen.blit(font.render(results[result], True, 'white'), (150, 20))
+        # NEW HAND knop komt helemaal onderaan, weg van de kaarten
+        new_hand = pygame.draw.rect(screen, 'white', [150, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [150, 700, 300, 100], 3, 5)
+        screen.blit(font.render('NEW HAND', True, 'black'), (180, 735))
+        button_list.append(new_hand)
+    
+    # Geval 3: actief spel - toon HIT ME en STAND knoppen
     else:
-        hit = pygame.draw.rect(screen, 'white', [30, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [30, 700, 300, 100], 3, 5)
-        hit_text = font.render('HIT ME', True, 'black')
-        screen.blit(hit_text, (55, 735))
+        hit = pygame.draw.rect(screen, 'white', [30, 700, 250, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [30, 700, 250, 100], 3, 5)
+        screen.blit(font.render('HIT ME', True, 'black'), (55, 735))
         button_list.append(hit)
-        stand = pygame.draw.rect(screen, 'white', [270, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [270, 700, 300, 100], 3, 5)
-        stand_text = font.render('STAND', True, 'black')
-        screen.blit(stand_text, (355, 735))
+        stand = pygame.draw.rect(screen, 'white', [320, 700, 230, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [320, 700, 230, 100], 3, 5)
+        screen.blit(font.render('STAND', True, 'black'), (355, 735))
         button_list.append(stand)
         score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
         screen.blit(score_text, (15, 840))
-    # if there is an outcome for the hand that was played, display a restart button and tell user what happened
-    if result != 0:
-        screen.blit(font.render(results[result], True, 'white'), (15, 25))
-        deal = pygame.draw.rect(screen, 'white', [150, 220, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [150, 220, 300, 100], 3, 5)
-        pygame.draw.rect(screen, 'black', [153, 223, 294, 94], 3, 5)
-        deal_text = font.render('NEW HAND', True, 'black')
-        screen.blit(deal_text, (165, 250))
-        button_list.append(deal)
-    return button_list
 
+    # if there is an outcome for the hand that was played, display a restart button and tell user what happened
+
+    return button_list
 
 # check endgame conditions function
 def check_endgame(hand_act, deal_score, play_score, result, totals, add):
@@ -276,6 +284,7 @@ while run:
             run = False
         if event.type == pygame.MOUSEBUTTONUP:
             if not active:
+                #Knop 0 = DEAL HAND
                 if buttons[0].collidepoint(event.pos):
                     active = True
                     initial_deal = True
@@ -287,7 +296,23 @@ while run:
                     reveal_dealer = False
                     outcome = 0
                     add_score = True
+
+            elif outcome != 0:
+                # knop 0 = NEW HAND (enige knop als het spel gedaan is)
+                if buttons[0].collidepoint(event.pos):
+                    active = True
+                    initial_deal = True
+                    game_deck = copy.deepcopy(decks * one_deck)
+                    my_hand = []
+                    dealer_hand = []
+                    outcome = 0
+                    hand_active = True
+                    reveal_dealer = False
+                    add_score = True
+                    dealer_score = 0
+                    player_score = 0
             else:
+                # knop 0 = HIT ME, knop 1 = STAND
                 # if player can hit, allow them to draw a card
                 if buttons[0].collidepoint(event.pos) and player_score < 21 and hand_active:
                     my_hand, game_deck = deal_cards(my_hand, game_deck)
@@ -295,21 +320,6 @@ while run:
                 elif buttons[1].collidepoint(event.pos) and not reveal_dealer:
                     reveal_dealer = True
                     hand_active = False
-                elif len(buttons) == 3:
-                    if buttons[2].collidepoint(event.pos):
-                        active = True
-                        initial_deal = True
-                        game_deck = copy.deepcopy(decks * one_deck)
-                        my_hand = []
-                        dealer_hand = []
-                        outcome = 0
-                        hand_active = True
-                        reveal_dealer = False
-                        outcome = 0
-                        add_score = True
-                        dealer_score = 0
-                        player_score = 0
-
 
     # if player busts, automatically end turn - treat like a stand
     if hand_active and player_score >= 21:
