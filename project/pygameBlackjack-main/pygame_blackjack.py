@@ -1,9 +1,16 @@
 # black jack in python wth pygame!
 import copy
 import random
+import os
 import pygame
 
+# Werkmap voor er voor te zorgen dat ik een subfolder kan gebruiken voor de muziek
+os.chdir(os.path.dirname(os.path.abspath(__file__)))  
+
+pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
+
+bg_image = pygame.transform.scale(pygame.image.load('background.png'), (900, 900))
 # game variables
 
 # Kaarten moeten nu als tuples worden opgeslagen voor zowel de waarde and het symbool
@@ -16,7 +23,7 @@ for suit in card_suits:
         one_deck.append((value, suit))
 
 decks = 4
-WIDTH = 600
+WIDTH = 900
 HEIGHT = 900
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('Pygame Blackjack!')
@@ -28,6 +35,7 @@ suit_font = pygame.font.SysFont('segoeuisymbol', 36)
 value_font = pygame.font.SysFont('freesansbold.ttf', 46)
 title_font = pygame.font.Font('freesansbold.ttf', 72)
 tiny_font = pygame.font.Font('freesansbold.ttf', 15)
+music_font = pygame.font.Font('freesansbold.ttf', 25)
 active = False
 # win, loss, draw/push
 records = [0, 0, 0]
@@ -50,10 +58,20 @@ BORDER_COLOR = (30, 60, 45) # iets donkerder groen voor de rand
 # bijhouden of het welkomscherm al gedaan is of neit
 game_started = False
 
+# Playlist van de mp3-bestanden in de map 'Music'
+PLAYLIST = [
+    'Music/Hip-Hop-Star.mp3',
+    'Music/Casino-Vip.mp3',
+    'Music/Jazz-Casino.mp3',
+    'Music/Casino-Royale.mp3',
+]
+music_on = False
+current_track = 0   # index van huidig nummer
+
 
 # functie om het welkomstscherm te tekenen
 def draw_welcome():
-    screen.fill(BG_COLOR)
+    screen.blit(bg_image, (0, 0))
     pygame.draw.rect(screen, BORDER_COLOR, [10, 10, WIDTH - 20, HEIGHT - 20], 8, 10)
 
     # grote titel vooraan
@@ -65,8 +83,7 @@ def draw_welcome():
     # instructie onderaan wat je moet doen 
     screen.blit(smaller_font.render('Druk SPATIE om te starten', True, 'white'), (60, 480))
     screen.blit(smaller_font.render('of klik ergens', True, (180, 220, 180)), (175, 530))
-    screen.blit(tiny_font.render('Made by Jelle for OPO "Introduction Project"', True, (180, 220, 180)), (25, 25))
-
+    screen.blit(tiny_font.render('Made by Jelle for OPO "Introduction Project"', True, (180, 220, 180)), (250, 850))
 
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
@@ -170,9 +187,9 @@ def draw_game(act, record, result):
 
     # Geval 1: Spel is nog niet gestart en toon DEAL HAND knop
     if not act:
-        deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [150, 20, 300, 100], 3, 5)
-        screen.blit(font.render('DEAL HAND', True, 'black'), (165, 50))
+        deal = pygame.draw.rect(screen, 'white', [150, 250, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [150, 250, 300, 100], 3, 5)
+        screen.blit(font.render('DEAL HAND', True, 'black'), (165, 275))
         button_list.append(deal)
     
      # Geval 2: Hand is gedaan en toon resultaat met NEW HAND knop onderaan 
@@ -180,30 +197,47 @@ def draw_game(act, record, result):
 
         # de score teller altijd tonen
         score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
-        screen.blit(score_text, (15, 840))
+        screen.blit(score_text, (150, 830))
         # resultaat tekst (win/verlies/gelijk) tonen op dezelfde positie als de DEAL HAND knop
-        screen.blit(font.render(results[result], True, 'white'), (150, 20))
+        screen.blit(font.render(results[result], True, 'white'), (150, 50))
         # NEW HAND knop komt helemaal onderaan, weg van de kaarten
-        new_hand = pygame.draw.rect(screen, 'white', [150, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [150, 700, 300, 100], 3, 5)
-        screen.blit(font.render('NEW HAND', True, 'black'), (180, 735))
+        new_hand = pygame.draw.rect(screen, 'white', [175, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [175, 700, 300, 100], 3, 5)
+        screen.blit(font.render('NEW HAND', True, 'black'), (195, 735))
         button_list.append(new_hand)
     
     # Geval 3: actief spel - toon HIT ME en STAND knoppen
     else:
-        hit = pygame.draw.rect(screen, 'white', [30, 700, 250, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [30, 700, 250, 100], 3, 5)
-        screen.blit(font.render('HIT ME', True, 'black'), (55, 735))
+        hit = pygame.draw.rect(screen, 'white', [100, 700, 250, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [100, 700, 250, 100], 3, 5)
+        screen.blit(font.render('HIT ME', True, 'black'), (125, 735))
         button_list.append(hit)
-        stand = pygame.draw.rect(screen, 'white', [320, 700, 230, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [320, 700, 230, 100], 3, 5)
-        screen.blit(font.render('STAND', True, 'black'), (355, 735))
+        stand = pygame.draw.rect(screen, 'white', [400, 700, 230, 100], 0, 5)
+        pygame.draw.rect(screen, 'green', [400, 700, 230, 100], 3, 5)
+        screen.blit(font.render('STAND', True, 'black'), (425, 735))
         button_list.append(stand)
         score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
-        screen.blit(score_text, (15, 840))
+        screen.blit(score_text, (150, 830))
 
     # if there is an outcome for the hand that was played, display a restart button and tell user what happened
 
+    # Muziekknoppen voor [AAN/UIT]  en [<]  [>]
+    btn_toggle = pygame.draw.rect(screen, (40,160,60) if music_on else (150,50,50), [650, 430, 150, 45], 0, 5)
+    pygame.draw.rect(screen, 'white', [650, 430, 150, 45], 2, 5)
+    screen.blit(smaller_font.render('ON' if not music_on else 'OFF', True, 'white'), (685, 435))
+    btn_prev = pygame.draw.rect(screen, (60, 60, 60), [650, 500, 45, 45], 0, 5)
+    pygame.draw.rect(screen, 'white', [650, 500, 45, 45], 2, 5)
+    screen.blit(smaller_font.render('<', True, 'white'), (663, 505))
+    btn_next = pygame.draw.rect(screen, (60, 60, 60), [745, 500, 45, 45], 0, 5)
+    pygame.draw.rect(screen, 'white', [745, 500, 45, 45], 2, 5)
+    screen.blit(smaller_font.render('>', True, 'white'), (755, 505))
+    # track-naam onder de knoppen voor dynamischer te maken
+    track_name = PLAYLIST[current_track].replace('Music/', '').replace('.mp3', '')
+    screen.blit(music_font.render(track_name, True, 'white'), (650, 575))
+    button_list.append(btn_toggle)
+    button_list.append(btn_prev)
+    button_list.append(btn_next)
+    
     return button_list
 
 # check endgame conditions function
@@ -252,7 +286,7 @@ while run:
         continue  # sla de rest van de loop over totdat het spel gestart is
 
     # Casino groene achtergrond toevoegen
-    screen.fill(BG_COLOR)
+    screen.blit(bg_image, (0, 0))
 
     # Decoratieve rand toevoegen rond het scherm
     pygame.draw.rect(screen, BORDER_COLOR, [10, 10, WIDTH - 20, HEIGHT - 20], 8, 10)
@@ -283,7 +317,35 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONUP:
-            if not active:
+            # muziekknoppen zijn de laatste 3 in button_list
+            btn_toggle, btn_prev, btn_next = buttons[-3], buttons[-2], buttons[-1]
+            if btn_toggle.collidepoint(event.pos):
+                music_on = not music_on
+                if music_on:
+                    try:
+                        pygame.mixer.music.load(PLAYLIST[current_track])
+                        pygame.mixer.music.play(-1)
+                    except Exception:
+                        music_on = False
+                else:
+                    pygame.mixer.music.stop()
+            elif btn_prev.collidepoint(event.pos):
+                current_track = (current_track - 1) % len(PLAYLIST)
+                if music_on:
+                    try:
+                        pygame.mixer.music.load(PLAYLIST[current_track])
+                        pygame.mixer.music.play(-1)
+                    except Exception:
+                        pass
+            elif btn_next.collidepoint(event.pos):
+                current_track = (current_track + 1) % len(PLAYLIST)
+                if music_on:
+                    try:
+                        pygame.mixer.music.load(PLAYLIST[current_track])
+                        pygame.mixer.music.play(-1)
+                    except Exception:
+                        pass
+            elif not active:
                 #Knop 0 = DEAL HAND
                 if buttons[0].collidepoint(event.pos):
                     active = True

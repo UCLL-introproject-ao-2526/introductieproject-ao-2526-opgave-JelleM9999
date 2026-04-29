@@ -82,3 +82,29 @@ Soms denk ik dat iets niet lang gaat duren maar dan zit ge er toch weer een paar
 Morgen na mijn werk ga ik proberen geluiden toe te voegen maar ik ben nog niet zeker wat ik exact wil doen.
 Ik denk misschien dat ik het scherm iets groter ga maken en dan rechts een paar knoppen bij zet met specifieke muziek ofzo.
 Moet er nog een nachtje over slapen :)
+
+# 29 April 23:45
+Vandaag stond muziek op het programma. Wat leek op een simpele taak bleek opnieuw toch niet zo simpel te zijn voor mij ...
+
+Om te beginnen probeerde ik een Qmusic radiostream URL rechtstreeks in pygame.mixer.music.load() te steken. Pygame ondersteunt HTTP-streams echter niet blijkbaar. Bij het klikken op de knop crashte het volledige programma met exit code 1.
+Jammer genoeg moest ik dus van radiostreams afzien.
+
+Tweede poging was simpeler: één knop om muziek aan/uit te zetten met een lokaal mp3-bestand.
+pygame.mixer.music kan enkel lokale bestanden aan blijkbaar(mp3, wav, ogg) dus besliste ik om lokale bestanden te gebruiken.
+
+Ik wilde de mp3-bestanden netjes in een submap Music/ zetten. Het pad 'Music/song.mp3' werkte niet omdat het script opgestart wordt vanuit de project map, niet vanuit de pygameBlackjack-main map. 
+mijn Oplossing was om dan maar : os.chdir(os.path.dirname(os.path.abspath(__file__))) bovenaan het script zodat de werkmap altijd de map van het script zelf is. Dit loste het probleem op.
+
+Als eindresultaat na al mijn "gekloot" heb ik nu een playlist van nummers in de map Music/, drie knoppen (AAN/UIT, vorig, volgend) en de naam van het huidige nummer wordt getoond.
+
+Toen ik wat verder aan het kijken was vond ik toch wel dat mijn achtergrond met RGB kleuren op niet veel trok dus heb ik via AI een achtergrond 900x900 laten maken die wel in mijn project paste.
+Deze achtergrondafbeelding heb ik dan toegevoegd via pygame.image.load.
+
+Ik heb zelf ook nog echt veel zitten spelen met die knoppen om ze exact mooi af te lijnen. 
+Maar die milimeters zullen wel niet uitmaken vermoed ik.
+
+Al met al weer een avond waarbij "simpel" toch niet zo simpel bleek, en uiteindelijk toch weer 4 uur prullen werd maar het werkt nu :)
+Dat is het belangrijkste
+
+Morgen ga ik misschien nog wat kleine aanpassingen doen maar ik zit zo goed als aan mijn 20 uur.
+Ik ga misschien de feedback afwachten daarna om te kijken wat de docent graag nog van veranderingen ziet. 
