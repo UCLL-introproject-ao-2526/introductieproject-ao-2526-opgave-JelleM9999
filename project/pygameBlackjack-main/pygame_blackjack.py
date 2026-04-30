@@ -67,6 +67,14 @@ PLAYLIST = [
 ]
 music_on = False
 current_track = 0   # index van huidig nummer
+volume = 0.5
+slider_dragging = False
+
+# Geluidseffecten
+new_hand_sound = pygame.mixer.Sound('Sounds/New-Hand.mp3')
+take_card_sound = pygame.mixer.Sound('Sounds/Take-Card.mp3')
+new_hand_sound.set_volume(volume)
+take_card_sound.set_volume(volume)
 
 
 # functie om het welkomstscherm te tekenen
@@ -96,9 +104,9 @@ def deal_cards(current_hand, current_deck):
 
 # draw scores for player and dealer on screen
 def draw_scores(player, dealer):
-    screen.blit(font.render(f'Score[{player}]', True, 'white'), (350, 400))
+    screen.blit(font.render(f'Player Score[{player}]', True, 'white'), (250, 400))
     if reveal_dealer:
-        screen.blit(font.render(f'Score[{dealer}]', True, 'white'), (350, 100))
+        screen.blit(font.render(f'Dealer Score[{dealer}]', True, 'white'), (250, 100))
 
 
 # draw cards visually onto screen
@@ -199,7 +207,7 @@ def draw_game(act, record, result):
         score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
         screen.blit(score_text, (150, 830))
         # resultaat tekst (win/verlies/gelijk) tonen op dezelfde positie als de DEAL HAND knop
-        screen.blit(font.render(results[result], True, 'white'), (150, 50))
+        screen.blit(font.render(results[result], True, 'gold'), (150, 50))
         # NEW HAND knop komt helemaal onderaan, weg van de kaarten
         new_hand = pygame.draw.rect(screen, 'white', [175, 700, 300, 100], 0, 5)
         pygame.draw.rect(screen, 'green', [175, 700, 300, 100], 3, 5)
@@ -225,15 +233,21 @@ def draw_game(act, record, result):
     btn_toggle = pygame.draw.rect(screen, (40,160,60) if music_on else (150,50,50), [650, 430, 150, 45], 0, 5)
     pygame.draw.rect(screen, 'white', [650, 430, 150, 45], 2, 5)
     screen.blit(smaller_font.render('ON' if not music_on else 'OFF', True, 'white'), (685, 435))
-    btn_prev = pygame.draw.rect(screen, (60, 60, 60), [650, 500, 45, 45], 0, 5)
-    pygame.draw.rect(screen, 'white', [650, 500, 45, 45], 2, 5)
-    screen.blit(smaller_font.render('<', True, 'white'), (663, 505))
-    btn_next = pygame.draw.rect(screen, (60, 60, 60), [745, 500, 45, 45], 0, 5)
-    pygame.draw.rect(screen, 'white', [745, 500, 45, 45], 2, 5)
-    screen.blit(smaller_font.render('>', True, 'white'), (755, 505))
+    btn_prev = pygame.draw.rect(screen, (60, 60, 60), [650, 585, 45, 45], 0, 5)
+    pygame.draw.rect(screen, 'white', [650, 585, 45, 45], 2, 5)
+    screen.blit(smaller_font.render('<', True, 'white'), (663, 585))
+    btn_next = pygame.draw.rect(screen, (60, 60, 60), [745, 585, 45, 45], 0, 5)
+    pygame.draw.rect(screen, 'white', [745, 585, 45, 45], 2, 5)
+    screen.blit(smaller_font.render('>', True, 'white'), (755, 585))
     # track-naam onder de knoppen voor dynamischer te maken
     track_name = PLAYLIST[current_track].replace('Music/', '').replace('.mp3', '')
-    screen.blit(music_font.render(track_name, True, 'white'), (650, 575))
+    screen.blit(music_font.render(track_name, True, 'white'), (650, 550))
+    # Volume slider
+    screen.blit(music_font.render('Volume', True, 'white'), (675, 486))
+    slider_left, slider_top, slider_width = 650, 519, 150
+    pygame.draw.rect(screen, (80, 80, 80), [slider_left, slider_top, slider_width, 8], 0, 4)
+    pygame.draw.rect(screen, (100, 200, 100), [slider_left, slider_top, int(slider_width * volume), 8], 0, 4)
+    pygame.draw.circle(screen, 'white', (slider_left + int(slider_width * volume), slider_top + 4), 9)
     button_list.append(btn_toggle)
     button_list.append(btn_prev)
     button_list.append(btn_next)
@@ -304,9 +318,9 @@ while run:
     # once game is activated, and dealt, calculate scores and display cards
     if active:
         player_score = calculate_score(my_hand)
+        dealer_score = calculate_score(dealer_hand)
         draw_cards(my_hand, dealer_hand, reveal_dealer)
         if reveal_dealer:
-            dealer_score = calculate_score(dealer_hand)
             if dealer_score < 17:
                 dealer_hand, game_deck = deal_cards(dealer_hand, game_deck)
         draw_scores(player_score, dealer_score)
@@ -316,7 +330,21 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if 650 <= event.pos[0] <= 800 and 510 <= event.pos[1] <= 532:
+                slider_dragging = True
+        if event.type == pygame.MOUSEMOTION and slider_dragging:
+            volume = max(0.0, min(1.0, (event.pos[0] - 650) / 150))
+            pygame.mixer.music.set_volume(volume)
+            new_hand_sound.set_volume(volume)
+            take_card_sound.set_volume(volume)
         if event.type == pygame.MOUSEBUTTONUP:
+            if slider_dragging:
+                volume = max(0.0, min(1.0, (event.pos[0] - 650) / 150))
+                pygame.mixer.music.set_volume(volume)
+                new_hand_sound.set_volume(volume)
+                take_card_sound.set_volume(volume)
+                slider_dragging = False
             # muziekknoppen zijn de laatste 3 in button_list
             btn_toggle, btn_prev, btn_next = buttons[-3], buttons[-2], buttons[-1]
             if btn_toggle.collidepoint(event.pos):
@@ -348,6 +376,7 @@ while run:
             elif not active:
                 #Knop 0 = DEAL HAND
                 if buttons[0].collidepoint(event.pos):
+                    new_hand_sound.play()
                     active = True
                     initial_deal = True
                     game_deck = copy.deepcopy(decks * one_deck)
@@ -362,6 +391,7 @@ while run:
             elif outcome != 0:
                 # knop 0 = NEW HAND (enige knop als het spel gedaan is)
                 if buttons[0].collidepoint(event.pos):
+                    new_hand_sound.play()
                     active = True
                     initial_deal = True
                     game_deck = copy.deepcopy(decks * one_deck)
@@ -377,6 +407,7 @@ while run:
                 # knop 0 = HIT ME, knop 1 = STAND
                 # if player can hit, allow them to draw a card
                 if buttons[0].collidepoint(event.pos) and player_score < 21 and hand_active:
+                    take_card_sound.play()
                     my_hand, game_deck = deal_cards(my_hand, game_deck)
                 # allow player to end turn (stand)
                 elif buttons[1].collidepoint(event.pos) and not reveal_dealer:

@@ -108,3 +108,19 @@ Dat is het belangrijkste
 
 Morgen ga ik misschien nog wat kleine aanpassingen doen maar ik zit zo goed als aan mijn 20 uur.
 Ik ga misschien de feedback afwachten daarna om te kijken wat de docent graag nog van veranderingen ziet. 
+
+
+# 30 April 22:51
+Om eerlijk te zijn had ik vandaag niet veel zin om aan het project te werken want ik had echt een héél vermoeiende dag op het werk en had gisteren maar 3 uur geslapen.
+
+Maar ik wilde er toch nog graag wat werk insteken en een volume slider toevoegen zodat je het geluid omhoog en omlaag kan draaien voor mensen die misschien wat sensitief zijn.
+
+Ik dacht eerst dat dit simpel zou zijn maar er waren toch wat kleine uitdagingen. 
+Het slepen van de slider moest ik bijhouden via een slider_dragging variabele. 
+Bij MOUSEBUTTONDOWN zet ik die op True als je op de slider klikt, bij MOUSEMOTION pas ik het volume aan zolang je sleept, en bij MOUSEBUTTONUP laat ik de slider los. 
+Het volume pas ik dan toe op zowel pygame.mixer.music als de twee geluidseffecten new_hand_sound en take_card_sound.
+
+Daarna heb ik ook wat tijd gestoken in de positionering van de slider en de vorige/volgende knoppen zodanig dat alles netjes onder elkaar staat en niet over de tekst valt. Dit was meer trial and error met de coördinaten maar uiteindelijk ziet het er goed uit.
+
+Ik ga het hierbij laten voor de moment en misschien toch de feedback vragen van de docent wat hij nog graag zou zien wat ik extra doe.
+Ik denk dat ik nooit tevreden ga zijn en altijd uitbreidingen wil bijvoegen maar ik ga me moeten aan de uur restrictie houden.
