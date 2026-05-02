@@ -1,0 +1,58 @@
+Reflectie bij video https://www.youtube.com/watch?v=iwUR0kOVNs8
+
+
+
+Samenvatting:
+
+De spreker van deze video Bryan Liles legt in zijn presentatie uit dat softwareontwikkelaars continu moeten testen tijdens het programmeren i.p.v. op het einde van het project.
+Dat testen geen extra stap is die je optioneel uitvoert aan het einde van een project, maar iets wat continu en vanaf het begin moet gebeuren.
+Zijn kernboodschap is simpel: als je code niet getest is, is ze gebroken maar je weet het alleen nog niet.
+Deze mindset vormt de rode draad doorheen de hele presentatie.
+Dit is duidelijk omdat het meermaals in een leuke manier "Test all the fucking time" is verwerkt in zijn voorstelling.
+Volgens hem leidt uitgesteld testen vaak tot fouten die later moeilijker en duurder zijn om op te lossen.
+
+Bryan promoot Test Driven Development als werkwijze: eerst schrijf je een test die faalt, dan schrijf je de minimale code om die test te laten slagen, en daarna refactor je.
+Dat zorgt ervoor dat je altijd weet wat je code moet doen en of het werkt.
+Hij benadrukt dat een bug die gevonden wordt tijdens het schrijven van code bijna gratis te fixen is.
+Een bug die pas in productie gevonden wordt, kan enorm veel tijd, geld en reputatieschade kosten.
+Testen is dus een investering die zichzelf terugverdient.
+
+Volgens Bryan testen veel ontwikkelaars niet omdat ze het nooit hebben aangeleerd of omdat de cultuur in hun team het niet aanmoedigt.
+Hij insinueerd dat het een slechte gewoonte is die actief doorbroken moet worden.
+Hij roept zijn publiek op om een cultuurverandering te starten in hun team.
+zelf leidt hij een team van developers en is actief bezig met hun altijd testen te laten schrijven.
+
+Een goed testpakket maakt het veilig om code te refactoren of nieuwe features toe te voegen.
+Zonder tests ben je bang om bestaande code aan te raken omdat je niet weet wat je stuk maakt.
+Met tests heb je een vangnet dat je onmiddellijk waarschuwt als iets breekt.
+
+De presentatie werd gegeven op een Ruby-conferentie en Bryan wijst op de rijke ecosysteem aan test frameworks zoals RSpec, Test::Unit en later ook tools als Shoulda.
+Hij vindt dat de Ruby-gemeenschap geen excuus heeft om niet te testen, omdat de tools zo toegankelijk zijn.
+
+De titel van de talk ("Test all the f***ing time") zet al meteen de toon.
+Bryan is niet bang om te shockeren of te provoceren om zijn boodschap kracht bij te zetten.
+Hij gebruikt goede humor, sterke uitspraken en veel voorbeelden om zijn publiek wakker te schudden.
+
+
+
+Mijn persoonlijke reflectie:
+
+Ik ben het volledig eens met de kernboodschap dat testen belangrijk is.
+Zelf ben ik voor de eerste keer in contact gekomen met testen bij het OPO Back-End development.
+Hier heb ik vaak door kleine wijzigingen de code stuk gemaakt zonder ik het meteen doorhad.
+
+De vergelijking dat ongeteste code "broken code is die je nog niet ontdekt hebt" vond ik krachtig en speciaal.
+Wat ik minder vanzelfsprekend vond is de TDD-aanpak voor absolute beginners.
+Als je nog niet goed weet wat je code moet doen of hoe je ze uberhoudt moet schrijven is het moeilijk om eerst tests uit te schrijven.
+Eenmaal je een betere ontwikkelaar wordt ben ik het er wel mee eens dat het héél belangrijk is.
+
+Zijn presentatiestijl vind ik enorm entertainend en aanstekelijk, hij had mee direct mee in zijn verhaal.
+Dit is volgens mij een goede manier om presentaties te geven, je hebt op die manier de aandacht van iedereen in de zaal mee.
+Ik zou gemotiveerd zijn om me zelf meer te verdiepen in testen en om er mee bezig te zijn, maar anderen kunnen het misschien wat opdringerig vinden.
+
+
+
+Conclusie:
+
+Bryan de spreker pleit energiek en overtuigend dat continu testen een professionele basishouding is die software betrouwbaarder en tijd besparend maakt.
+Zijn argumenten en de manier van overbrengen zijn overtuigend, praktisch en maakt een duidelijke boodschap die motiverend is voor beginnende programmeurs.
