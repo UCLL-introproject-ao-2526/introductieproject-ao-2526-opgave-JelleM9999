@@ -124,3 +124,14 @@ Daarna heb ik ook wat tijd gestoken in de positionering van de slider en de vori
 
 Ik ga het hierbij laten voor de moment en misschien toch de feedback vragen van de docent wat hij nog graag zou zien wat ik extra doe.
 Ik denk dat ik nooit tevreden ga zijn en altijd uitbreidingen wil bijvoegen maar ik ga me moeten aan de uur restrictie houden.
+
+# 02 Mei 18:15
+Ik heb zojuist een mail gestuurd naar de lector voor feedback te vragen over het project.
+Het was niet zo eenvoudig om te beslissen waar ik specifiek feedback op wou, want ik ben zelf niet altijd even zeker of ik de juiste keuzes gemaakt heb. 
+
+Uiteindelijk heb ik gevraagd of hij vindt dat ik de juiste zaken heb aangepakt binnen de beschikbare tijd.
+Alsook of er dingen zijn die hij liever anders had gezien. 
+
+Ik ben benieuwd naar zijn antwoord, want ik merk dat ik snel geneigd ben om kleine details te blijven perfectioneren in plaats van grotere structurele keuzes in vraag te stellen.
+
+De feedback zal me hopelijk wat meer richting geven over wat echt telt.
