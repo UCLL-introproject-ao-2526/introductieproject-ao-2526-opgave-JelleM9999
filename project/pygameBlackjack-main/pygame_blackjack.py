@@ -10,11 +10,15 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
+# [dn] die scale is eigenlijk overbodig, het is sneller en simpeler als je de afbeelding resized in paint of photoshop
 bg_image = pygame.transform.scale(pygame.image.load('background.png'), (900, 900))
 # game variables
 
 # Kaarten moeten nu als tuples worden opgeslagen voor zowel de waarde and het symbool
 card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+# [dn] de echte symbolen gebruiken werkt, en is zeker niet incorrect. Maar het maakt het wel moeilijk om te zoeken, en in het algemeen zijn we als programmeur zeer voorzichtig
+# [dn] eigenlijk zie ik nooit accenten of trema's in code
+# [dn] SHDC werkt ook, en je kan een extra dictionary gebruiken om van 1 naar de andere te gaan
 card_suits = ['♠', '♥', '♦', '♣']
 
 one_deck = []
@@ -47,8 +51,12 @@ dealer_hand = []
 outcome = 0
 reveal_dealer = False
 hand_active = False
+# [dn] als ik outcome lees, weet ik niet meteen hoe die variable gebruikt wordt (is 0 een tie? -1 een loss), of zelf waar (misschien is het de outcome
+# [dn] van een file te openen? game_outcome, hand_outcome zijn al duidelijker, en je kan via comments verklaren wat er kan inzitten
 outcome = 0
+# [dn] zelfde comment
 add_score = False
+# [dn] zelfde comment. Ik denk ook dat result_strings hier duidelijker is, je gaat dit enkel gebruiken als text, niet om logica op te doen
 results = ['', 'PLAYER BUSTED *-*', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GAME...']
 
 # kleur variabelen voor achtergrond
@@ -56,6 +64,7 @@ BG_COLOR = (53, 101, 77)    # casino groen
 BORDER_COLOR = (30, 60, 45) # iets donkerder groen voor de rand
 
 # bijhouden of het welkomscherm al gedaan is of neit
+# [dn] hier is het goed
 game_started = False
 
 # Playlist van de mp3-bestanden in de map 'Music'
@@ -118,6 +127,7 @@ def draw_cards(player, dealer, reveal):
         card_suit = player[i][1]
 
         # harten en ruiten zijn rood,schoppen en klaveren zijn zwart
+        # [dn] exact hier, het is makkelijker D te typen, dan weer dat symbool te zoeken
         if card_suit in ['♥', '♦']:
             text_color = 'red'
         else:
@@ -126,6 +136,8 @@ def draw_cards(player, dealer, reveal):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
         
         # de kaartwaarde en het symbool op de kaart tekenen, met de juiste kleur en symbool dus linksboven en rechtsonder
+        # [dn] je hebt wel veel repitie heer, zoals 150, en vooral 70. Dus als dat ooit veranderd moet worden, moet je het op meerdere plekken 
+        # [dn] veranderen. Het extra werk is niet zo erg, maar het is heel common om eentje te missen, met irritante bugs tot gevolg. 
         screen.blit(value_font.render(card_value, True, text_color), (80 + 70 * i, 470+ 5 * i))
         screen.blit(suit_font.render(card_suit, True, text_color), (80 + 70 * i, 490 + 5 * i))
         screen.blit(suit_font.render(card_suit, True, text_color), (150 + 70 * i, 600 + 5 * i))
@@ -237,6 +249,8 @@ def draw_game(act, record, result):
     pygame.draw.rect(screen, 'white', [650, 585, 45, 45], 2, 5)
     screen.blit(smaller_font.render('<', True, 'white'), (663, 585))
     btn_next = pygame.draw.rect(screen, (60, 60, 60), [745, 585, 45, 45], 0, 5)
+    # [dn] wel een hele lap code. Kan wel wat organisatie gebruiken, gewoon wat blanco lijnen en commentaar
+    # [dn] bvb de lijn hieronder, heel moeilijk om te weten wat het doet. Makkelijk wanneer je het schrijft 
     pygame.draw.rect(screen, 'white', [745, 585, 45, 45], 2, 5)
     screen.blit(smaller_font.render('>', True, 'white'), (755, 585))
     # track-naam onder de knoppen voor dynamischer te maken
@@ -270,6 +284,8 @@ def check_endgame(hand_act, deal_score, play_score, result, totals, add):
         if add:
             if result == 1 or result == 3:
                 totals[1] += 1
+                # [dn] ook een cryptische lijn. Als je game_won = 2 had, was de lijn elif result == game_won, een stuk leesbaarder. Variabelen 
+                # [dn] gebruik ik vaak om een aan te geven aan een waarde
             elif result == 2:
                 totals[0] += 1
             else:
