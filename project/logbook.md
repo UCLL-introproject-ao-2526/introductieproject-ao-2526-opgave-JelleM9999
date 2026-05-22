@@ -135,3 +135,40 @@ Alsook of er dingen zijn die hij liever anders had gezien.
 Ik ben benieuwd naar zijn antwoord, want ik merk dat ik snel geneigd ben om kleine details te blijven perfectioneren in plaats van grotere structurele keuzes in vraag te stellen.
 
 De feedback zal me hopelijk wat meer richting geven over wat echt telt.
+
+# 19 Mei 10:30
+De feedback van de docent is binnen en ik heb die even rustig doorgenomen. Hij heeft zijn opmerkingen rechtstreeks in de code gezet via # [dn]commentaren, wat eigenlijk wel handig is want zo zie ik meteen exact waar het over gaat.
+
+De pygame.transform.scale die ik gebruik om de achtergrond te schalen had ik inderdaad gewoon beter eenmalig gedaan in Paint of iets dergelijks. Dat is een stuk efficiënter dan dat elke keer opnieuw te laten berekenen bij het laden.
+Uitendelijk had ik ok op het einde mijn Size window iets groter gemaakt en had ik daarvoor voor deze oplossing gekozen.
+
+Voor de kaartsymbolen heb ik wel bewust gekozen voor de echte tekens (♠, ♥, ♦, ♣) omdat ik het visueel echt aantrekkelijk wou maken, gewoon letters leek mij iets te simpel voor het project. 
+Maar hierdoor heb ik wel dan weer een aparte module moeten opzoeken die die symbolen uberhaupt kon weergeven want het standaard font kon er niet mee overweg. 
+Daan de docent geeft aan dat S, H, D, C veel praktischer is en dat je dan via een dictionary de vertaling naar het echte symbool kan maken. Dat is eerlijk gezegd een stuk slimmer, want nu is het inderdaad wat omslachtig om die symbolen telkens terug te vinden als je iets wil aanpassen.
+Alsook zoals hij vermeld kan dit veel problemen geven op later niveau.
+Zeker iets om mee te nemen.
+
+De variabelenamen heeft hij zeker en vast ook gelijk. en zijn ook een belangrijk punt van aandacht. outcome, add_score, results...
+Daan merkt terecht op dat die niet veel zeggen als je de code leest zonder context. game_outcome of hand_outcome is al meteen veel duidelijker, en result_strings zegt ook beter wat die lijst eigenlijk doet. 
+Kleine aanpassingen maar het maakt wel een verschil voor leesbaarheid.
+
+Alsook moet ik zeker en vast bij bepaalde dingen extra inline commentaar voorzien toekomstgericht.
+
+Dan de herhaling van getallen zoals 70 en 150 in draw_cards. 
+De reden dat ik die niet als variabelen heb gezet is is eigenlijk omdat ik constant millimeter per millimeter te sleutelen zat aan posities om de tekst goed te laten uitkomen op de kaarten, en op dat moment leek het makkelijker om gewoon de getal zelf aan te passen.
+Maar hij heeft gelijk dat je daarmee op meerdere plaatsen tegelijk moet aanpassen en dat je er snel eentje mist (wat ook héél veel is gebeurd :)).
+Het is inderdaad beter één variabele bovenaan aanpassen dan vijf keer hetzelfde getal door de code te gaan zoeken.
+
+Maar ik denk dat het beter is om dan dit op het einde te doen eenmaal de layout volledig in orde is.
+Zeker als beginnende developer zoals mijzelf.
+
+Hij vermelde ook dat in draw_game staat inderdaad ook een behoorlijk lange lap code aan elkaar zonder veel structuur. 
+Wat witregels en commentaar zouden het inderdaad al een stuk overzichtelijker maken.
+En in check_endgame gebruikte ik result == 2 zonder dat duidelijk is wat 2 betekent. 
+Een variabele zoals game_won = 2 zou dat meteen verduidelijken.
+
+Al met al gaat de feedback vooral over leesbaarheid en onderhoudbaarheid, niet echt over fouten.
+Het spel werkt maar de code is soms wat moeilijk te volgen voor iemand anders. 
+Dat is iets waar ik de volgende keer al vroeger in het proces bewuster op ga moeten letten en beter integreren.
+
+Ik vond het wel goed om eens feedback te krijgen op een project dat ik heb gemaakt.

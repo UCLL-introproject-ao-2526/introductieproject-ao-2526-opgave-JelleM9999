@@ -54,5 +54,5 @@ Ik zou gemotiveerd zijn om me zelf meer te verdiepen in testen en om er mee bezi
 
 Conclusie:
 
-Bryan de spreker pleit energiek en overtuigend dat continu testen een professionele basishouding is die software betrouwbaarder en tijd besparend maakt.
+De spreker pleit energiek en overtuigend dat continu testen een professionele basishouding is die software betrouwbaarder en tijd besparend maakt.
 Zijn argumenten en de manier van overbrengen zijn overtuigend, praktisch en maakt een duidelijke boodschap die motiverend is voor beginnende programmeurs.

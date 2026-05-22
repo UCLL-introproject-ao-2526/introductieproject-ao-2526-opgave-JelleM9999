@@ -1,23 +1,34 @@
-AI Challanges
-	-> Deze vond ik wel leuk om op te zoeken
-		Die van de neuronen was moeilijk
+Aan: Daan Nijs
+Van: Jelle Michiels
+Onderwerp: Feedback introductieproject
 
-Crack
-	-> Conceiled image was was plezant.
-		Moeilijk om het antwoord te vindne maar eenmaal ik met de kleuren speelde ging het wel vlot.
-	-> Hash
-		Heb ik opgelost via https://sha1.gromweb.com/?hash=10ceee87f8b145ab495c3bca73b94455970159c6 op de website dus reverse SHA-1
-	-> Pass 1
-		Via Intelij opengedaan en swordfish is het antwoord
-	-> Pass 2
-		minstens 50 char moet beginnen met @ en moet password hebben en 123454321 en de rest dan opgevuld met _ tot 50 chars
-		
-04-Multimedia
-	-> Color
-		Via de Color Analyser was dit heel makkelijk te achterhalen
-	-> Image
-		Ging makkelijk gewoon kijken in file explorer
-		
-05-Data-formats
-	-> 06-qr 
-		goeie meme van vroeger :D 
+Hey Daan,
+
+Nu het introductieproject erop zit geef ik je feedback over het vak zoals gevraagd.
+Eerlijk gezegd heb ik het over het algemeen een fijn vak gevonden.
+
+De challenges vond ik echt leuk. Het is goed hoe breed je ze hebt gemaakt, ze gaan niet enkel over één specifiek deel van IT.
+Zo komt ge echt in contact met heel veel verschillende hoeken van IT en dat vond ik een meerwaarde.
+Je merkt pas hoe groot het vakgebied is als je plots van het kraken van een wachtwoord naar het analyseren van een afbeelding gaat.
+
+De concealed image challenge was even zoeken, maar eenmaal ik besefte dat ik met de kleuren moest spelen dan snapte ik het.
+De neural networks challenge vond ik dan weer de lastigste van de reeks, dus daar was wat opzoekwerk voor nodig. 
+
+Er zijn wel wat bugs in de challenges, maar deze heb ik al reeds via mail aan jou doorgegeven.
+Maar ook los daarvan liep ik bij sommige challenges vast door onduidelijkheden in de omschrijving zelf, waardoor ik soms meer tijd kwijt was aan het uitvissen wat de bedoeling was dan aan het eigenlijke oplossen.
+Een kleine extra hint of wat meer context zou bij die gevallen al een verschil maken zonder de uitdaging weg te nemen.
+
+Het project vond ik heel goed opgezet, zeker omwille van de beperking van 20 uur.
+Dat klinkt misschien raar maar die begrenzing gaf mezelf meer tijd om zelf wat op te zoeken in de officiële documentatie.
+Zonder die beperking was ik waarschijnlijk blijven sleutelen aan nutteloze details waarop ik me hyperfocus zonder echt bij te leren. Het dwong mezelf ook om keuzes te maken en prioriteiten te stellen, wat op zich ook een waardevolle les is.
+Dit ook zeker omdat er niet echt een specifieke richtlijn was hoe de applicatie uitgebouwd moest worden.
+
+De feedback die ik op mijn code gekregen heb van jou was ook heel waardevol. 
+De opmerkingen over variabelenamen, magic numbers en leesbaarheid zijn dingen waar ik de volgende keer al van bij het begin rekening mee ga houden in plaats van er pas achteraf over na te denken.
+Het heeft wel "even" geduurd voor ik antwoord kreeg op de gevraagde feedback over het project en mijn vragen over de challenges, maar ik snap dat volledig want ik weet ook dat je het druk hebt en van overal gebombardeerd wordt met mails.
+Toen ik je contacteerde via Teams heb ik direct een antwoord gekregen en moest ik niet wachten dus de communicatie was verder zeker goed!
+
+Al met al een gevarieerd en zeer interessant vak!
+
+Met vriendelijke groeten,
+Jelle Michiels
